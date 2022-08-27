@@ -1,0 +1,99 @@
+<!-- Jinija syntax - extending the base template by adding content in the block content section-->
+{%extends "base.html" %}
+{% block title %} Search SNPs {% endblock %}
+{% block content %}
+
+<!-- Heading text at the top of the page -->
+
+<div class="container" >
+
+    <div class='mt-sm-3'style="margin:auto;max-width:1000px">
+      <center><h2>Search for SNPs</h2></center>
+      <p>Use one of the below parameters to search for single nuceotide polymorphisms
+           (SNPs) across five subpopulations from the 1000 genomes project. The five subpopulations are:</p>
+      <div style='margin:auto;max-width:500px'>
+    
+        <ul>
+          <li style="color: rgba(6, 121, 156, 0.945);"> British in England and Scotland (GBR) </li>
+  
+          <li style="color: rgba(6, 121, 156, 0.945);"> Han Chinese in Beijing, China (CHB)</li>
+  
+          <li style="color: rgba(6, 121, 156, 0.945);"> Esan in Nigeria (ESN) </li>
+  
+          <li style="color: rgba(6, 121, 156, 0.945);">Bengali in Bangladesh (BEB) </li>
+  
+          <li style="color: rgba(6, 121, 156, 0.945);"> Peruvian in Lima, Peru (PEL) </li>
+        </ul>
+  
+      </div>
+
+      <center><p style="font-size: 12px; color: red;">Maximum search window size: 1 million base pairs.</p></center>
+
+    </div>
+  
+  </div>
+
+
+<!-- Create the search form with all of the user selection parameters -->
+<form class="example" method="post" action="/search_out" 
+ style="margin:auto;max-width:600px">
+  <!-- Text search bar-->
+   <input type="text" 
+           placeholder="E.g. rs999980 or PMM1 or 11124625-15303188" 
+           name="snp" class="form-control" required>
+   <!-- Select dropdown menu -->
+   <select name="select" required class="custom-select" >
+       <!--<option disabled selected value="">Search by</option>-->
+       <option value="SNP Name">SNP Name</option>
+       <option value="Gene Name">Gene Name</option>
+       <option value="Location">Location</option>
+   </select>
+    <!-- Population checkboxes -->
+    <div class='form-control' required>
+  
+      <label>Subpopulations: </label>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name='subpop' value="GBR" checked >
+        <label class="form-check-label" for="inlineCheckbox1">GBR</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name='subpop' value="CHB" checked>
+        <label class="form-check-label" for="inlineCheckbox2">CHB</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name='subpop' value="BEB" checked >
+        <label class="form-check-label" for="inlineCheckbox3">ESN</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name='subpop' value="PEL" checked >
+        <label class="form-check-label" for="inlineCheckbox4">BEB</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name='subpop' value="ESN" checked>
+        <label class="form-check-label" for="inlineCheckbox5">PEL</label>
+    </div>
+
+  </div>
+    <!-- Search/Submit button -->
+   <div>
+        <button type="submit" class="btn btn-primary" onclick="$('#loading').show();"  id="register"  disabled="disabled">Search</button>
+    </div>
+
+</form>
+
+<!-- SNP map on search page -->
+<div>
+
+  {{map_snp|safe}}
+
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+
+

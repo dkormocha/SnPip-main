@@ -1,0 +1,47 @@
+body { padding-top: 100px;  /* Fixed spacing from top of page*/
+  
+}
+
+/* New CSS class for fonts, heading(h) 1-4 and paragraph(p) */
+.headie1 {font-size:4.5rem;
+  font-weight:300;
+}
+
+.headie2 {font-size:2.5rem;
+  font-weight:350;
+}
+
+.headie3 {font-size:1.70rem;
+  font-weight:350;
+
+}
+
+.headie4 {font-size:1.4rem;
+  font-weight:350;
+
+}
+
+.para{font-size:1.20rem;
+  font-weight:300;  
+}
+
+p {font-size:1.20rem;
+  font-weight:300;   
+}
+
+h4 {font-size:1.4rem;
+  font-weight:350;
+
+}
+
+h3 {font-size:1.70rem;
+  font-weight:350;
+}
+
+h2 {font-size:2.5rem;
+  font-weight:350;
+}
+
+h1 {font-size:4.5rem;
+  font-weight:300;
+}

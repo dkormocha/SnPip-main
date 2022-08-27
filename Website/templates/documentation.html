@@ -1,0 +1,1057 @@
+{%extends "base.html" %}
+{% block title %} Documentation {% endblock %}
+{% block content %}
+
+    <style>
+
+    #myBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 12px;
+      border: none;
+      outline: none;
+      background-color: #dc3545;
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 4px;
+    }
+
+    #myBtn:hover {
+      background-color: #555;
+    }
+    </style>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Go up!</button>
+
+
+    <script>
+    //Get the button
+    var mybutton = document.getElementById("myBtn");
+
+    // When the user scrolls down 50px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+    </script>
+
+<center>
+<h2> Documentation </h2>
+</center>
+
+<br>
+
+<div class="container para">
+
+
+    
+
+        <h3>Sections</h3>
+     
+        <hr>
+        <h4><a href="#intro"> Introduction </a></h4>
+        <h4> <a href="#fra"> Methodology </a></h4>
+        <ol>
+            <li> <a href="#aim"> Aim </a> <br></li>
+            <li> <a href="#data"> Data </a> <br></li>
+            <li> <a href="#meth"> Methods </a> <br></li>
+        </ol>
+
+        <h4> <a href="#stat"> Statistics </a> </h4>
+        <ol>
+            <li><a href="#hap">Haplotype Diversity</a></li>
+            <li> <a href="#taj"> Tajima D </a></li>
+            <li> <a href="#hud">Hudson FST </a></li>
+            <li> <a href="#shan">Shannon’s Diversity index </a></li>
+        </ol>
+
+        <h4> <a href="#webapp"> Web Application</a></h4>
+        <ol>
+            <li> <a href="#in"> Input</a> <br></li>
+            <li> <a href="#out"> Output data </a> <br></li>
+            <li> <a href="#file"> Output File </a></li>
+        </ol>
+
+        <h4> <a href="#ref"> References </a></h4>
+
+    
+
+    
+
+</div>
+
+
+
+
+<div class="container text-right" style="padding-top: 10px;"> 
+ <a href="{{url_for('doc_download')}}" class="btn btn-danger"> Download! </a>
+</div> 
+
+
+
+
+<div class="container" style="margin-top: 50px;">
+
+    <div id="intro" style="text-align: center;">
+    <h2> Introduction </h2>
+    </div>
+
+        <hr>
+
+        <p>The term single nucleotide polymorphism (SNP) refers to a variation of a single base pair in a complementary DNA double strand. SNPs can be inherited and heritable genetic variants. SNPs represent the largest category of genetic variation in the human genome (Shen et al., 1999, Ramírez-Bello and Jiménez-Morales, 2017), occurring at a frequency of roughly one every 1000 base pairs (Shastry, 2009). SNPs are typically found in clusters which are unevenly distributed along the genome (Koboldt et al., 2006) and can be found in non-coding sequences (outside of genes, as well as in introns), or in exons that are transcribed into proteins. In the latter case, a distinction is made between so-called "silent" or "synonymous" SNPs, which change the nucleotide sequence but do not change the amino acid sequence derived from it due to the degeneracy of the genetic code, and "non-synonymous" SNPs that lead to an amino acid change at the codon in question. Even if a SNP is in a non-coding genomic region, it can influence gene transcription (regulatory SNPs) if, for example, it is in DNA segments to which transcription factors (enhancers, silencers) or RNA polymerases bind (promoters). SNPs in an intron can also result in a "cryptic" splice site, for example. </p>
+
+        <p>
+            In the past, little attention was paid to SNPs, especially when they were located in non-coding gene segments. They were thought to be largely meaningless variants. Through large-scale genome-wide association studies, it is now known that some SNPs influence the risk of certain diseases in complex ways, many of which are not understood. This applies, for example, to individual non-coding SNPs in the human genes IKZF1, ARID5B and CEBPE and the associated risk of developing acute lymphoblastic leukemia (Papaemmanuil et al., 2009). 
+        </p>
+
+
+        <p>
+            In recent years, research on SNPs has advanced rapidly, requiring further applications in which they can be analysed more intensively. SNPip was created as a web application to support this progress and increase the availability of SNP summary statistics for human chromosome 22. 
+        </p>
+    
+
+
+
+
+
+
+    <div id="fra" style="text-align: center;">
+    <h2>Methodology</h2> 
+    </div>
+   
+
+    <hr>
+
+    <div id="aim">
+    <h3> Aim </h3>
+    </div>
+
+    <br>
+
+    <div class="para">
+
+
+        <p>The SNPip webserver exploits a large database containing SNP information for human chromosome 22. The main functions of SNPip involve searching a MySQL database by chromosomal location, gene name or SNP name for a subset of 5 subpopulations. The search query outputs basic statistics for allele frequency and genotype frequency for every subpopulation. Additionally, if multiple SNPs are selected it contains summary statistics for genetic diversity, haplotype diversity and Tajimas D. If multiple populations are selected it contains statistics of pairwise genetic distance and delta Tajimas-D. </p> 
+
+        <br>
+
+        <p>Search by:</p> 
+
+        <br>
+
+        <ul>
+            <li> Gene annotation </li>
+            <li> SNP annotation </li>
+            <li>Reference and Alternate allele </li>
+        </ul>
+
+        <img src="/static/search.gif">
+
+
+
+        <br>
+
+        <p>Output:</p> 
+        <br>
+        <ul>
+            <li> Minor allel frequency </li>
+            <li> Genotype frequency </li>
+            <li> Shannon Diversity  </li>
+            <li> Haplotype Diversity </li>
+            <li> Tajimas-D  </li>
+            <li> Hudson_FsT </li>
+            
+        </ul>
+
+
+        <hr>
+
+        <div id="data">
+        <h3> Data </h3>
+        </div>
+        <br>
+
+        <p>
+            SNPip uses 1000 Genomes Project Phase 3 variants data from ENSEMBLs ftp server <a href="http://ftp.ensembl.org/pub/grch37/current/data_files/homo_sapiens/GRCh38/" target="_blank">(http://ftp.ensembl.org/pub/grch37/current/data_files/homo_sapiens/GRCh38/) </a> ( The 1000 Genomes Project Consortium 2015, Howe et al., 2021). This data originally comes from the 1000 Genomes Phase3 pipeline remapped from GRCh37 using dbSNP rsIDs remapped to GRCh38. Furthermore it contains definitions of the super populations of European, East Asian, South East Asian, American and African from 1000 Genomes browser. Super populations are defined by using the 1000G panel file.
+        </p> 
+
+           <p> TThe database contains biallelic SNPs and only phased genotype data derived from preprocessing the phase 3 genotype data. SNPip contains only single nucleotide variants (SNPs). Indels and larger structural variants have been removed and only contains high confidence calls for ALT alleles and positions that have passed all filters.<br>
+
+            <span class="text-danger"> <b> SNPip contains SNPs located on chromosomes 22 (February 2022) </b> </span>
+        </p>
+
+
+
+        <p>
+            All the 1000G variants has been preprocessed with bcftools before creating the database using the following criteria: 
+        </p>
+        <br>
+
+        <ol>
+            <li>Remove SNPs with duplicate rsIDs. </li>
+            <li>Remove Indels, and multiallelic sites </li>
+            <li> Run PLINK variant filtering </li>
+            <li> Remove SNPs with duplicate chromosomal coordinates.   </li>
+        
+        </ol>
+
+        <br>
+
+        <h4> Population and Sub-population </h4>
+        <br>
+
+        <p> SNPip super population definitions are based on the following 1000G cohorts: </p>
+
+
+        <ul>
+            <li> European (EUR) </li>
+                <ul>
+                    <li style="color: green;"> <b> British in England and Scotland (GBR) </b> </li>
+                    <li> 91 Samples  </li>
+                </ul>
+            <li> East Asian (EAS) </li>
+                <ul>
+                    <li style="color: green;"> <b>Han Chinese in Beijing, China (CHB) </b> </li>
+                    <li> 103 Samples  </li>
+                </ul>
+            <li> Africa (AFR) </li>
+                <ul>
+                    <li style="color: green;"> <b>Esan in Nigeria (ESN) </b> </li>
+                    <li> 99 Samples  </li>
+                </ul>           
+            <li> Southeast  Asian (SAS)  </li>
+                <ul>
+                    <li style="color: green;"> <b>Bengali in Bangladesh (BEB) </b> </li>
+                    <li> 86 Samples  </li>
+                </ul>
+            <li> American Ancestry (AMR)  </li>
+                <ul>
+                    <li style="color: green;"> <b>Peruvian in Lima, Peru (PEL) </b> </li>
+                    <li> 85 Samples  </li>
+                </ul>
+        </ul>
+
+        <br>
+
+        <h4> SnPip Database Summery </h4>
+
+        <br>
+
+  
+        <img src="/static/schema.png" alt="database schema" width="60%" height="60%">
+            <figcaption style="color: darkgrey;"><i> The Database schema used in the SnPip application. </i></figcaption> <br> <br>
+
+
+                <p>
+                    SNPip uses a relational database hosted on the google cloud sever, within a SQL instance, naturally allowing for remote access to the SNP data stored within it. The SNPip search app can then connect to the database through its public IP address. 
+                </p>
+
+
+                <p> 
+
+                    The data for these subpopulations are stored in two tables. The first table is an SNP focused table containing information on the SNPs chromosome, position on said chromosome, the SNP ID, its alternate and reference ID as well as some aggregate genotype stats based on all five genotypes.  In order to reduce the time it takes to retrieve information from the database, proper indexing of each table in the database had to be achieved. In the SNP table this is done through the use of an auto incrementing primary key, which assigned each row a numerical value which increased with each row added to the table. The RsID of each SNP was also used as an index inside this table, allowing for it to be used as a foreign key linking both tables. The ID column of the SNP table has a one (SNP table) to many (Subpopulation Table) relationship.   </p>
+
+                    <p>
+ 
+                    The other table contains information on each of the subpopulations. It consists of the SNP ID followed by its subpopulation and then its subpopulation specific allele frequency and genotype stats. Each SNP in this table has 5 entries, one for each subpopulation: British in England and Scotland (GBR), Han Chinese in Bejing, China (CHB), Esan in Nigeria (ESN), Bengali in Bangladesh (BEB), Peruvian in Lima, Peru (PEL). Due to each SNP having multiple entries in the subpopulation table, maintenance of the data in this table can become slow and cumbersome. In order to circumvent this, a hybrid primary key was assigned to each entry in the table. This key consisted of each rows’ SNP ID and the subpopulation that its statistics are related to. In doing so, better indexing of the table is achieved as the duplicate SNP IDs have in essence been removed.   
+
+                    Through the use of a relational database and purposeful parsing of relevant information with regards to our aims, SNPip was able to reduce the size of said database by approximately 30% (the initial chromosome 22 vcf file was 10gb as opposed to the 7gb size of the current database). 
+                </p>
+        <br>
+
+
+        <table class="table table-stripped table-striped table-bordered">
+            <tr>
+                <th>Sub-population</th>
+                <th>Number of SNPs in the Database </th>
+              </tr>
+            <tr>
+                <td> British in England and Scotland (GBR)  </td>
+                <td> 1,053,837  </td>
+            </tr>
+            <tr>
+                <td> Han Chinese in Beijing, China (CHB) </td>
+                <td> 1,053,837  </td>
+            </tr>
+            <tr>
+                <td> Esan in Nigeria (ESN) </td>
+                <td> 1,053,837  </td>
+            </tr>
+            <tr>
+                <td> Bengali in Bangladesh (BEB) </td>
+                <td>1,053,837 </td>
+            </tr>
+            <tr>
+                <td> Peruvian in Lima, Peru (PEL) </td>
+                <td> 1,053,837  </td>
+            </tr>
+        </table>
+         <figcaption style="color: darkgrey;"><i>The table summarises the number of SNPs in each Subpopulation population within the SnPip database. </i></figcaption>
+
+         <hr>
+
+        <div id="meth">
+        <h3> Methods </h3>
+        </div>
+
+        <br>
+
+        <h4>Data Preprocessing<h4>
+
+            <br>
+
+        <p>
+        Phase 3 data from the 1000 Genomes project was selected as it contains recent sequencing and variant call information. For further processing the .vcf.gz and the .tbi data was loaded and stored in the same folder. 
+
+        </p>
+
+        <br>
+        <h4> Subsetting </h4>
+        <br>
+
+        <p>
+        The processing of the 1000 genome data was done with bcftools, vcftools and tabix (Heng et al., 2009, Danecek et al., 2011, Danecek et al., 2021). To subset the data into subpopulations of interest the 1000G panel file  was used and each subpopulation was copied into a .txt file containing only samples from this subpopulation. Subsequently, five .txt files containing only the samples of the used subpopulations were created. 
+        </p>
+
+        <mark style="background-color: darkgrey;"> 
+
+            <i>$ bcftools view –force samples < all_populations.vcf.gz > -S peru.txt > output_PEL.vcf< </i>
+        </mark>
+
+        <br><br>
+
+        <h4> Annotation </h4>
+        <br>
+
+        <p>
+        Furthermore, after subsetting the data the gene annotation was added. A gene file for Chromosome 22 containing all start and end positions from the UCSC Table Browser (Kent et al., 2002) was downloaded and converted into a bed file and then indexed by tabix. 
+        </p>
+
+        <mark style="background-color: darkgrey;"> 
+            <i>
+                $ bgzip genes_for_annotation.bed<br>
+                $ tabix -p bed genes_for_annotation.bed.gz
+            </i>
+        </mark><br><br>
+
+        <p>After doing that, the following command gets the gene annotation inside INFO column of the .vcf file</p>
+
+        <mark style="background-color: darkgrey;"> 
+            <i>
+            
+                $ bcftools annotate \ <br>
+
+                -a genes_for_annotation.bed.gz \<br>
+
+                -c CHROM,FROM,TO,GENE \<br>
+
+                -h <(echo '##INFO=< ID=GENE,Number=1,Type=String,Description="Gene name" >') \<br>
+
+                output_GBR.vcf.gz \<br>
+
+                -o annotated_GBR.vcf
+            </i>
+        </mark> <br> <br>
+
+
+       <p> Since the used VCF file has already been annotated with rsIDs by 1000G no more annotation was needed.</p>
+       <br>
+        <h4>Filter for only including biallelic sites</h4>
+        <br>
+        
+
+        <p> In diploid systems multiallelic sites are often ignored because many modern methods struggle to include multi-allelic variants in an accurate manner and creating a strongly misleading association (Campbell et. al., 2016, Jiang et al., 2020). Therefore, we decided to not use them for further statistics. To delete multiallelic sites and exclude indels, the following command in bcftools was used.  
+        </p>
+
+        <mark style="background-color: darkgrey;"> 
+            <i>$ bcftools view –max-alleles 2 –exclude-type indels annotated_GBR.vcf.gz</i>
+        </mark> <br> <br>
+
+        <h4>Calculate minor allele frequency</h4> 
+            <br>
+        <p>  The allele frequency accounts for the relative frequency of an allele at a specified SNP. Since only biallelic data was used only the minor allele frequency (MAF) has been reported by using the following equation:
+        </p>
+
+        <p>
+        <center>
+        <sup>𝐴𝐶</sup>&frasl;<sub>𝐴𝑁</sub> = 𝑀𝐴𝐹
+        </center>
+        </p>
+
+        <p>
+            As described in the present formula (1) the total number of observed alleles (AC) between all samples is divided by the number of counts the examined allele was found inside a specified locus. Therefore bcftools and vcftools has been used.
+
+        </p>
+
+        <p> Option 1:</p>
+
+        <mark style="background-color: darkgrey;"> <i> $ vcftools –vcf annotated_GBR.vcf.gz –freq –-out freq_annotated_GBR </i></mark>
+
+        <p>Option 2:</p>
+
+        <mark style="background-color: darkgrey;"> <i> $ bcftools +fill-tags annotated_GBR.vcf.gz -o freq_annotated_GBR.vcf.gz </i></mark> <br> <br>
+            
+
+
+        <h4> Decoding and Encoding Genotype Data for/from MySQL </h4><br>
+
+            <p>In order to get the genotype information inside the database, SNPip uses an encoder that converts the phased genotypes from 0 and 1 format into a string for each SNP. Explicitly, the genotype data was divided into the four possible genotypes of 0|0 (homozygous-ref), 0|1 (heterozygous-ref), 1|0 (heterozygous-alt) and 1|1 (homozygous-alt) and then encoded using the following algorithm:</p>
+
+            <p>
+            1|0 = “a” <br>
+
+            1|1 = “b” <br>
+
+            0|1 = “c” <br>
+
+            0|0 = “d” <br>
+             </p>
+
+            <p>Furthermore, to split the data into the different subpopulations that have been chosen SNPip created a nested_dictionary that was structure the following:</p>
+
+            <p>
+            nested_dictionary= {'GBR' :{ 'a' : 'e' , 'b' : 'f' , 'c' : 'g' , 'd' :'h' } , <br>
+
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp;'PEL' : { 'a' : 'i' , 'b' : 'j' , 'c' : 'k' , 'd' : 'l' } , <br>
+
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp;'ESN' : { 'a' : 'm' , 'b' : 'n' , 'c' : 'o' , 'd' :'p' } ,<br>
+
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp;'BEB' : { 'a' : 'q' , 'b' : 'r' , 'c' : 's' , 'd' : 't' } ,<br>
+
+            &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &nbsp;'CHB' : { 'a' : 'u' , 'b' : 'v' , 'c' : 'w' , 'd' : 'x' }}<br>
+            </p>
+
+            <p>In conclusion the resulting string of each SNPs genotype data was constructed out of letters from “e-z” and the index of the string informed the decoder of the specific sample the genotype referred to. In the next step when searching on the website the string gets decoded to the actual genotype information data by creating a 3D list from the nested_dictionary. </p>
+
+
+
+
+
+
+        <br>
+        <div id="stat" style="text-align: center;">
+        <h3> Statistics </h3>
+        </div>
+        <hr>
+        <br>
+
+        <p> 
+            For the calculation of Haplotype Diversity, Tajima-D and Hudson-FST the python package scikit allel has been used. Shannon Diversity as an index of genetic diversity has been computed separately. Genotype data from the database was decoded into a 3D-list of genotypes for every sample and every SNP to be used with scikit allel.  
+
+            The list of genotype data is encoded in the following 3D list format from the database: </p>
+
+            <p>
+
+            pre_arr [[[0, 1],[0, 0]],<br>
+
+            &emsp; &emsp; &emsp;[[1, 0],[0, 0]],<br>
+
+            &emsp; &emsp; &emsp;[[0, 0],[1, 1]]]<br>
+
+            </p>
+
+            <br>
+            <div id="hap">
+           <h4> Haplotype Diversity </h4>
+            </div>
+           <br>
+
+            <p >Haplotype Diversity represents the probability of two randomly sampled alleles being different. Here, a haplotype array for the region of interest gets created by using the genotype data stored in the database. Furthermore, the function allel.haplotype_diversity generates an estimate of haplotype diversity.  
+
+
+
+
+
+            <p> This is calculated by the following formula: </p>
+
+            <p>
+                <i># check inputs </i><br>
+
+            g = GenotypeArray(pre_arr)<br>
+
+           <i> # creates haplotype array </i><br>
+
+            h = g.to_haplotype()<br>
+
+               <i> # number of haplotypes </i><br>
+
+                n = h.n_haplotypes<br>
+
+                <i># compute haplotype frequencies<br> </i>
+
+                f = h.distinct_frequencies()<br>
+
+               <i> # estimate haplotype diversity </i> <br>
+               Hd = (1 – np.sum(f**2) * n / (n-1) -> 𝐻𝑑=(<sup>1−∑𝑝𝑖2∗𝑛 </sup> &frasl; <sub>(𝑛−1))</sub> </p> <br>
+
+
+            <p>
+
+                The estimate of haplotype diversity is calculated over the whole region selected by the user. Furthermore, for visualization SNPip computes the data in bins over the region to enable precise analysis. The values obtained from this function are in between 0 and 1. Where “0” accounts for a locus consisting of mainly one haplotype and “1” refers to a very diverse region with several haplotypes. The following graph describes a statistical output for haplotype diversity delivered by SNPip. By clicking the subpopulations on the right, it is possible to highlight only certain subpopulations. Furthermore, the haplotype diversity is calculated in small bins over the whole locus making it possible to analyze smaller partitions. Moreover, an info box opens by hovering over a specified bar showing additional information including subpopulation selected, region on chromosome and the value for haplotype diversity inside the selected range. To make comparison easier it is also possible to slide through the whole region and zoom into desired ranges. Additionally, a screenshot can be taken by clicking on the camera on the top right (Figure 1). 
+
+            </p>
+
+
+            <center>
+            <img src="/static/graphs/haplotype_graph.png" style="height: 100%; width: 100%;">
+            </center>
+
+            <figcaption style="color: darkgrey;"><i>  Figure 1 Visualization of Haplotype Diversity for PMM1. Showing distinct patterns of homozygosity between the selected populations within specified regions. Higher values near to 1 consider a higher probability of picking two different alleles by random choice. Values near 0 consider a very homozygous region between the samples picked. </i> </figcaption> <br><br>
+
+
+           <p> For further analysis SNPip provides a downloadable result table next to the graph (Figure 2). </p>
+
+
+            <center>
+            <img src="/static/graphs/haplotype_table.png" style="height: 30%; width: 30%;">
+            </center>
+
+
+             <figcaption style="color: darkgrey;"><i> Figure 2 Downloadable result table for Haplotype Diversity within and between populations. </i> </figcaption>
+
+
+
+
+
+
+
+            <br>
+
+            <hr>
+
+            <div id="taj">
+            <h4>   Tajima D </h4>
+            </div>
+
+            <br>
+
+            <p>
+
+                 Natural populations can sustain a certain amount of variation which is dependent on the population size and the amount of variation occuring. Consequently, by generating a value to estimate how much variation a population should be able to sustain helps to understand and determine this problem. Being able to infer deviation from that expectation is useful to understand whether a particular kind of selection is going on. Consequently, Tajimas D is a test against neutrality to see if the SNPs are subject to selection within a population and computes an average number of pairwise differences in between base pairs of various population samples and compares it to the total number of variant sites in that sample. Subsequently, it compares two sequences on either evolving randomly versus one evolving in a non-random manner. Explicitly, mutations that occur randomly are unbiased (neutral) and the one’s undergoing selection are biased. The test requires at least three homologous DNA sequences to identify these which do not go with the neutral theory and consequently have no effects on fitness and survival (Tajima, 1989). 
+
+
+            </p> 
+
+
+            <p>The main input of scikit allel looks like this: </p>
+
+            <p>
+               <i> # check inputs </i> <br>
+
+                g = GenotypeArray(pre_arr) <br>
+
+               <i> # count alleles </i> <br>
+
+                ac = g.count_alleles() <br>
+
+               <i> # calculate tajimas </i> <br>
+
+                allel.tajima_d(ac) <br>
+
+                <p>Having a closer look into the equation that follows allel.tajima_d gets us insights into the number 
+                of Segregating sites (S) and number of samples (n). </p> 
+
+                <i> # count segregating variants </i> <br> 
+
+                S = ac.count_segregating() <br>
+
+                If S < min_sites(3): <br>
+
+                return np.nan <br>
+
+                <i># assume number of chromosomes samples is constant for all variants </i> <br>
+
+                n = ac.sum(axis=1).max() <br>
+            </p>
+
+
+            <p>
+                Additionaly a1, pi (π) and theta (θ) are main factors to evaluate for Tajimas D. Here, π describes the mean pairwise difference within a given sequence meanwhile θ stands for the expectation of π. Theta in a purely neutral population with no special mutational events concludes a measurement for mutational drift.
+            </p>
+
+
+
+
+            <p>
+                <i> # (n-1)th harmonic number </i> <br>
+
+                a1 = np.sum(1 / np.arrange(1, n) <br>
+
+               <i> # calculate Waterson theta </i> <br>
+
+                theta_hat_w_abs = S / a1 <br>
+
+               <i> # calculate mean pairwise distance </i> <br>
+
+                mpd = mean_pairwise_difference(ac, fill = 0) <br>
+
+               <i> # calculate theta_hat pi (sum difference over variants) </i> <br>
+
+                theta_hat_pi_abs = np.sum(mpd) <br>
+
+               <i> # calculate theta_hat pi (sum difference over variants) </i> <br>
+
+                d= theta_hat_pi_abs - theta_hat_w_abs <br>
+
+                <p> Given certain circumstances π may not be right at that expectation (θ) and this measure is named Tajimas D. This variable is the normalized version of:</p>
+
+                <p> 𝐷= 𝜋− 𝜃 </p>
+            <p>
+
+                Where, π describes the observed mean pairwise difference and θ occurs as the expected mean pairwise difference within sequences inside a population. Tajimas D in a more accurate manner is calculated by the following:
+            </p>
+
+                <center>
+
+                <img src="/static/tajima.png" alt="formula Tajima-D" style="height: 18%; width: 18%;">
+
+                </center>
+
+
+
+
+
+
+
+                <p> 
+                    Inferring the sampling variance (how different these statistics are from sample to sample) computes Tajimas D in that equation: 
+
+                </p>
+                    <center>
+                    <img src="/static/tajima2.png" alt="formula">
+                    </center>
+
+
+
+            <p> In neutral population we would expect: <br><br>
+
+ 
+
+            𝐸[𝜋]= 𝜃 <br>
+            
+            𝐸[𝑆]= <sub>𝑎1 </sub>𝜃<br>
+             
+             
+             
+
+           <p> Given certain circumstances π may not be right at that expectation (θ) and this measure is named Tajimas D.  <br>
+
+            Tajimas D lies with 95% probability inside -2 and 2. All values outside this range should be used carefully and may need further analysis. </p>
+
+
+            𝐼𝑓: 𝐷<0 <br>
+            If: D<0 <br>
+             
+
+             <p>
+
+            A negative Tajimas D concludes a selection removing variation resulting in the conclusion of recent expansion of population size. This could be due to bottleneck-effects or selective sweeps.  </p>
+
+             
+
+             
+            𝐼𝑓: 𝐷>0 <br>
+            If: D>0 <br>
+             
+             
+
+             
+
+            <p> A positive Tajimas D assumes a maintaining selection and a resulting contraction of population size caused by balancing selection. </p>
+
+                       
+            𝐼𝑓: 𝐷=0<br>
+            If: D=0<br> 
+             
+             
+
+            <p>A neutral Tajimas D concludes that the population is evolving under the neutral theory and as it is expected from the per mutation-drift equilibrium. There is no evidence of selection events. </p>
+
+            <p>If SNPip generates NaN values this may be caused because the minimum segregating sites of three were not inside the calculation. </p>
+
+
+            <center>
+            <img src="/static/graphs/tajima_graph.png" style="height: 100%; width: 100%;">
+            </center>
+
+             <figcaption style="color: darkgrey;"><i> Figure 3 Visualization of Tajima D  for PMM1. Showing distinct patterns of D between the selected populations within specified regions. An example explanation of the graph can be given by looking at Bengali in the regions of 41.578921M bp – 41.574945M bp and 41.586971M bp – 41.58972M bp where a recent selective sweep and lower average heterozygosity would be possible to conclude. </i> </figcaption>
+
+
+            <center>
+            <img src="/static/graphs/tajima_table.png" style="height: 30%; width: 30%;">
+            </center>
+
+            <figcaption style="color: darkgrey;"><i> Figure 4 Downloadable result table for values of Tajima D for every selected population. In comparison to the Tajima D values generated for each bin it shows an overall negative Tajima D whereas the user can now in connection with the graph conclude where the strongest selective sweeps are happening. </i> </figcaption>
+
+
+
+        </p>
+        <br>
+
+        <hr>
+
+        <div id="hud">
+        <h4> Hudson FST </h4>
+        </div>
+        <br>
+
+
+            <p> 
+
+                The fixation index offered by Hudson et al., 2009 is a population genomics statistics used to show how much variation there is among different species or populations. It is looking at the proportion of genetic variation that is within population relative to that which is between populations:
+
+            </p>
+
+
+                <img src="/static/fst.png" alt="formula" style="height: 60%; width: 60%;">
+
+
+            <p>
+
+            Inside the forwarded function 𝐻𝑇 refers to the average heterozygosity between populations and 𝐻𝑆 refers to the average heterozygosity within a population. Heterozygosity is a measure of genetic variation calculated by the sum of the squared allele frequencies:</p>
+
+             <p>   𝐻=1− ∑𝑝𝑖<sup>2</sup> </p>
+
+            <p>  SNPip takes the estimator of Hudson which takes averages of FST according to the Weir & Cockerham (1984) definition since this is independent from sample sizes.
+
+            </p>
+
+                <img src="/static/fst2.png" alt="formula" style="height: 30%; width: 30%;">
+
+
+            <p>
+
+            Furthermore, SNPip computes an estimate of average FST within a region by just using the average of pairwise differences and does not make use of any topological structure of the gene as this should not change the results in a significant manner (Hudson et al., 1992, Bhatia, et al., 2013).</p>
+            <p>
+           <i> # allele count and GenotypeArray creation</i> <br>
+
+            ac1 = allel.GenotypeArray(pre_arr1).count_alleles()<br>
+
+            ac2 = allel.GenotypeArray(pre_arr2).count_alleles()<br>
+
+            <i># calculate tajimas</i><br>
+
+            allel.hudson_fst_d(ac1, ac2)<br>
+
+            <i># number of alleles</i><br>
+
+            an1 = np.sum(ac1, axis=1)<br>
+
+            an1 = np.sum(ac1, axis=1)<br>
+
+            <i># average siversity (heterozygosity) within each population</i><br>
+
+            within = (mean_pairwise_difference(ac1, an1) +<br>
+
+            (mean_pairwise_difference(ac2, an2) / 2<br>
+
+           <i> # divergence (heterozygosity) between each population</i><br>
+
+            Between = = (mean_pairwise_difference_between(ac1, ac2, an2,<br>
+
+           <i> # define numerator and denominator for FST calculations</i><br>
+
+            num = between – within<br>
+
+            den = between<br>
+
+            <i># averaging fst over variants</i><br>
+
+            fst = np.sum(num)/np.sum(den)<br>
+            </p>
+            <p>
+                The FST will most likely be a value between 0 and 1 where values near 0 will show less variance and values near 1 show more variance. At the border of 0.25 one can consider a significant deviation on the selected region between the populations selected is shown. FST values will be NaN if there are no heterozygous sites in the specified regions. Values that are negative can be considered 0 and no deviation of variance could be observed.
+
+                The visualisation of genetic distances shows two distinct lines. The red line contributes to a significant difference between populations at 0.25% meanwhile the grey line refers to an upper threshold of FST between continental populations (Figure 1).
+
+            </p>
+
+            <p>
+                The visualization of genetic distances shows two distinct lines. The red line contributes to a significant difference between populations at 0.25% meanwhile the grey line refers to an upper threshold of FST between continental populations. Moreover, it is visible which populations differ the most from each other which for the region of 41.57777M bp – 41.578869M bp on PMM1 (Chromosome 22) would be ESN vs. GBR (0.16), ESN vs. CHB (0.16) and ESN vs. BEB (0.13) with FSTs between 0.13 – 0.16. Subsequently ESN shows the most distinct patterns of SNPs inside this region in comparison to other populations. Consequently, SNPip makes it visible that the distances in between GBR vs CHB ( ~ 0), GBR vs. BEB ( ~ 0) and CHB vs BEB ( ~ 0) are near 0 showing no distinct patterns of variation inside this region (Figure 1). Additionally, the slider on the bottom allows to slide through different regions across PMM1 and compare the results. The step size is calculated by 10% of the gene length. It is furthermore, possible to download these graphs at certain positions, when hovering over it by taking a automatically downloaded screenshot on the top right of the graph.
+
+            </p>
+
+
+            <center>
+            <img src="/static/graphs/fst_graph.png" style="height: 100%; width: 100%;">
+            </center>
+
+
+             <figcaption style="color: darkgrey;"><i>
+                Figure 5: Hudson_FST of the gene PMM1 in the region between 41.57777M - 41578869M bp on Chromosome 22. The red line contributes to a significant difference between populations at (25%). The grey line refers to an upper threshold of FST between continental populations (12%). For the specified region the populations of GBR vs. ESN and CHB vs. ESN as well as BEB vs. ESN show to most genetic distance between each other.
+            </i></figcaption>
+
+            <br><br>
+            <p> Moreover, next to each graph a table of the average FST over the whole region is downloadable (screen) </p>
+
+
+            <center>
+            <img src="/static/graphs/fst_table.png" style="height: 30%; width: 30%;">
+            </center>
+
+            <figcaption style="color: darkgrey;"><i> Figure 6 Downloadable table next to the Hudson_FST visualization, where average FSTs over the whole selected regions are calculated. </i> </figcaption> <br>
+
+        <hr>
+
+        <br>
+        <div id="shan">
+        <h4> Shannon’s Diversity index </h4>
+        </div>
+        <br>
+
+
+        <p>
+            Shannon diversity index (SDI, H) is widely used in ecology and population genetic studies due to its adaptive properties to describe variation at multiple levels. As opposed to measures based on heterozygosity or allele number, SDI weighs alleles in proportion to their population. Using allele frequency in SDI, SNpip calculates genetic diversity. The allele frequency for a SNP variant in each population is used to describe the genetic diversity between each population.
+        </p>
+
+        <center>
+
+       <p> 𝐻= −∑[(𝑝𝑖)∗ln⁡((𝑝𝑖)] </p>
+
+        </center>
+
+
+
+        <ul>
+            <li>H = Shannon Diversity index </li>
+            <li>· 𝑝𝑖 = allele frequency (AF) where the proportion of alternate alleles (AC, Allele Count) found divided by the total number of alleles (AN, Allele Number) found.</li>
+            <ul>
+                <li>p<sub>i</sub> = AC / AN </li>    
+                <li>pi = for each population (i = population 1, 2, 3)  </li>
+            </ul>
+            <li> Minimum diversity (H<sub>min</sub>) value is at 0 where there is no diversity, only the reference allele.</li>
+            <li> Maximum diversity (H<sub>max</sub>) is the log () of the total number of alleles </li>
+
+        </ul> 
+
+
+        <p> SDI calculated using a python algorithm with the SDI formula:   </p>
+
+        <ol>
+            <li>Select allele frequency for the SNP variant for each population.</li>
+            <li>For each population, multiply the af by the natural log of af.</li>
+            <li>Sum all the numbers from step 2.</li>
+            <li>Multiply the sum by -1 to get a positive value.</li>
+        </ol>
+
+
+        <p>
+
+            The visualization of Shannon diversity shows a line graph with peaks on certain positions where the selected populations differ the most on each other. By hovering over these peaks an info box containing the rsID, SDI values and positional information will open. The graph is also downloadable by clicking on the camera in the top right corner of the graph (Figure 2).
+
+
+        </p>
+
+            <center>
+
+            <img src="/static/graphs/shannon_graph.png" style="height: 100%; width: 100%;">
+            </center>
+
+             <figcaption style="color: darkgrey;"><i> Figure 7 Visualisation of Shannon's Diversity Index on all SNPs in between PMM1. The graph is calculated based on the populations selected (here: ESN, PEL, CHB, BEB and GBR) and shows differences in specific positions. In the bottom there is a sliding window making it possible to specify certain regions and zoom into these and evaluate the distribution of Shannons Diversity Index of PMM1.</i></figcaption> <br><br>
+
+             <p>
+                Considerably, also for Shannons Diversity Index SNPip provides a table to download the Shannon Diversity results calculated for every single SNP inside the slected region (Figure 8). 
+            </p>
+
+             <center>
+            <img src="/static/graphs/shannon_table.png" style="height: 30%; width: 30%;">
+            </center>
+            <figcaption style="color: darkgrey;"><i> Figure 8 Downloadable table next to the visualization of Shannons Diversity index to get a table of results containing all results of Shanon Diversity for every SNP and the selected populations </i> </figcaption>
+
+
+
+
+
+
+
+
+
+
+
+        <div id="webapp" style="margin-top:50px; text-align: center;">
+        <h2>Web Application</h2> 
+        </div>
+        <hr>
+        <br>
+        <div id="in">
+        <h3> Input</h3>
+        </div>
+        <br>
+
+
+        <p>
+            SNPip search form can take 3 different types of inputs, the SNP name (RSID), the gene name and the genomic position. The input form for SNP name can only take a single RSID of interest, which will then returning information regarding that specific SNP. Likewise, only one gene name can be searched; although, depending on the gene multiple SNP's with complementary information will be return and relevant statistical data. Lastly, the genomic position takes a start and end number which can also return multiple SNP but also genes if multiple genes within the range.
+        </p>
+
+        <p>
+            The user can also select the population of interest, there are 5 different sub population the user can choose from: GBR, CHB, ESN, BEB, PEL (please look at Population and Sub-population subsection in Data). 
+
+        </p>
+
+        <br>
+        <div id="out">
+        <h3> Output </h3>
+        </div>
+
+        <p>
+            When searching with snp name, the output given is the RSID, subpopulation, minor frequency and genotype.  
+
+        </p>
+
+            <img src="/static/graphs/bengalisnp.png" style="height: 100%; width: 100%;">
+            <figcaption style="color: darkgrey;"><i>  Figure 9 Shows the SNPs information for all the SNP's in the PMM1 gene.  </i> </figcaption> <br> <br>
+
+        <p>
+            For gene name and genomic position, the output will be similar to SNP name search, but for multiple SNP's if gene or position contains multiple SNP’s. <br>
+            Additionally, when multiple SNPs are returned from searching using gene name and genomic position statistics such as Tajima's D is calculated given the populations selected, check out the statistics section for more detailed explanation on the statistical output.
+
+        </p>
+
+
+        <br>
+        <div id="file">
+        <h3> Output files </h3>
+        </div>
+        <br>
+
+        <p>  SNPip download function allows users to download any table which has been generated by user search, this includes the SNP information table for every population and the statistical summary data. The plotly function also allows user to take a screenshot and download statistical data generated on graph.</p>
+
+        <br>
+        <h4>  Output file names  </h4>
+        <ul><li> SNP_Inforamtion.tsv </li>
+            <li> Hudson_FST.tsv   </li>
+            <li> Tajima_D.csv </li>
+            <li> Shannon_Diversity.tsv </li>
+            <li> Haplotype_Diversity.tsv </li>
+        </ul>
+
+        
+
+        
+
+        <div id="ref" style="margin-top: 50px; text-align: center;">
+        <h2> References </h2>
+        </div>
+
+        <hr>
+
+        <p>
+            <ol>
+                <li>  Danecek P, Bonfield JK, et al. Twelve years of SAMtools and BCFtools. Gigascience (2021) 10(2):giab008</li>
+
+                <li>  Heng Li, Bob Handsaker, Alec Wysoker, Tim Fennell, Jue Ruan, Nils Homer, Gabor Marth, Goncalo Abecasis, Richard Durbin, 1000 Genome Project Data Processing Subgroup, The Sequence Alignment/Map format and SAMtools, Bioinformatics, Volume 25, Issue 16, 15 August 2009, Pages 2078–2079, https://doi.org/10.1093/bioinformatics/btp352</li>
+
+                <li>  The 1000 Genomes Project Consortium. A global reference for human genetic variation.Nature 526, 68–74 (2015). https://doi.org/10.1038/nature15393</li>
+
+
+                <li>  Petr Danecek, Adam Auton, Goncalo Abecasis, Cornelis A. Albers, Eric Banks, Mark A. DePristo, Robert Handsaker, Gerton Lunter, Gabor Marth, Stephen T. Sherry, Gilean McVean, Richard Durbin and 1000 Genomes Project Analysis Group, Bioinformatics, 2011</li>
+
+                <li>  UCSC Genome Browser: Kent WJ, Sugnet CW, Furey TS, Roskin KM, Pringle TH, Zahler AM, Haussler D. The human genome browser at UCSC. Genome Res. 2002 Jun;12(6):996-1006.</li>
+
+                <li>   Campbell IM, Gambin T, Jhangiani S, et al. Multiallelic Positions in the Human Genome: Challenges for Genetic Analyses. Hum Mutat. 2016;37(3):231-234. doi:10.1002/humu.22944 </li>
+
+                <li>  Jiang Y, Chen S, Wang X, et al. Association Analysis and Meta-Analysis of Multi-Allelic Variants for Large-Scale Sequence Data. Genes (Basel). 2020;11(5):586. Published 2020 May 25. doi:10.3390/genes11050586 </li>
+
+
+                <li>F Tajima, Statistical method for testing the neutral mutation hypothesis by DNA polymorphism., Genetics, Volume 123, Issue 3, 1 November 1989, Pages 585–595, https://doi.org/10.1093/genetics/123.3.585</li>
+
+
+                <li>Hudson RR, Slatkin M, Maddison WP. Estimation of levels of gene flow from DNA sequence data. Genetics. 1992 Oct;132(2):583-9. doi: 10.1093/genetics/132.2.583. PMID: 1427045; PMCID: PMC1205159 </li>
+
+ 
+
+                <li>Bhatia G, Patterson N, Sankararaman S, Price AL. Estimating and interpreting FST: the impact of rare variants. Genome Res. 2013 Sep;23(9):1514-21. doi: 10.1101/gr.154831.113. Epub 2013 Jul 16. PMID: 23861382; PMCID: PMC3759727. </li>
+
+ 
+
+                <li>Kevin L Howe, Premanand Achuthan, James Allen, Jamie Allen, Jorge Alvarez-Jarreta, M Ridwan Amode, Irina M Armean, Andrey G Azov, Ruth Bennett, Jyothish Bhai, Konstantinos Billis, Sanjay Boddu, Mehrnaz Charkhchi, Carla Cummins, Luca Da Rin Fioretto, Claire Davidson, Kamalkumar Dodiya, Bilal El Houdaigui, Reham Fatima, Astrid Gall, Carlos Garcia Giron, Tiago Grego, Cristina Guijarro-Clarke, Leanne Haggerty, Anmol Hemrom, Thibaut Hourlier, Osagie G Izuogu, Thomas Juettemann, Vinay Kaikala, Mike Kay, Ilias Lavidas, Tuan Le, Diana Lemos, Jose Gonzalez Martinez, José Carlos Marugán, Thomas Maurel, Aoife C McMahon, Shamika Mohanan, Benjamin Moore, Matthieu Muffato, Denye N Oheh, Dimitrios Paraschas, Anne Parker, Andrew Parton, Irina Prosovetskaia, Manoj P Sakthivel, Ahamed I Abdul Salam, Bianca M Schmitt, Helen Schuilenburg, Dan Sheppard, Emily Steed, Michal Szpak, Marek Szuba, Kieron Taylor, Anja Thormann, Glen Threadgold, Brandon Walts, Andrea Winterbottom, Marc Chakiachvili, Ameya Chaubal, Nishadi De Silva, Bethany Flint, Adam Frankish, Sarah E Hunt, Garth R IIsley, Nick Langridge, Jane E Loveland, Fergal J Martin, Jonathan M Mudge, Joanella Morales, Emily Perry, Magali Ruffier, John Tate, David Thybert, Stephen J Trevanion, Fiona Cunningham, Andrew D Yates, Daniel R Zerbino, Paul Flicek Ensembl 2021. Nucleic Acids Res. 2021, vol. 49(1):884–891 PubMed PMID: 33137190. doi:10.1093/nar/gkaa942 </li>
+
+                <li> E Papaemmanuil, FJ Hosking, J Vijayakrishnan, A Price, B Olver, E Sheridan, SE Kinsey, T Lightfoot, E Roman, JA Irving, JM Allan, IP Tomlinson, M Taylor, M Greaves, RS Houlston: Loci on 7p12.2, 10q21.2 and 14q11.2 are associated with risk of childhood acute lymphoblastic leukemia. In: Nat Genet., 2009, 41(9), S.1006–1010, doi:10.1038/ng.430, PMID 19684604 </li>
+
+ 
+
+                <li>Hugot et al.: Association of NOD2 leucine-rich repeat variants with susceptibility to Crohn’s Disease. In: Nature, Band 411, Mai 2001, S. 599–603, PMID 11385576 </li>
+
+                 
+
+                 
+
+                <li>Ogura et al.: A frameshift mutation in NOD2 associated with susceptibility to Crohn’s disease. In: Nature, Band 411, Mai 2001, S. 603–606, PMID 11385577 </li>
+
+                 
+
+                <li>DL Thomas, CL Thio, MP Martin, Y Qi, D Ge, C O’Huigin, J Kidd, K Kidd, SI Khakoo, G Alexander, JJ Goedert, GD Kirk, SM Donfield, HR Rosen, LH Tobler, MP Busch, JG McHutchison, DB Goldstein, M Carrington: Genetic variation in IL28B and spontaneous clearance of hepatitis C virus. In: Nature, 2009, 461(7265), S. 798–801. doi:10.1038/nature08463, PMID 19759533 </li>
+
+                 
+
+                 
+
+               <li> T. Bersaglieri, P. C. Sabeti u.a.: Genetic signatures of strong recent positive selection at the lactase gene. In: American Journal of Human Genetics. Band 74, Nummer 6, Juni 2004, S. 1111–1120, doi:10.1086/421051, PMID 15114531, PMC 1182075 </li>
+
+                 
+
+               <li> Friederike Flachsbart, Janina Dose, Liljana Gentschew, Claudia Geismann, weitere 29 Autoren sowie Almut Nebel: Identification and characterization of two functional variants in the human longevity gene FOXO3.In: Nature Communication 8/2017: 2063, 1–12.doi:10.1038/s41467-017-02183-y </li>
+
+                 
+
+                 
+
+                <li>Konopiński, M. Shannon diversity index: a call to replace the original Shannon’s formula with unbiased estimator in the population genetics studies (2020). Peerj, 8, e9391. doi: 10.7717/peerj.9391 </li>
+
+                 
+
+                <li>A. Chao, L. Jost, T. Hsieh, K. Ma, W. Sherwin and L. Rollins, "Expected Shannon Entropy and Shannon Differentiation between Subpopulations for Neutral Genes under the Finite Island Model", PLOS ONE, vol. 10, no. 6, p. e0125471, 2015. Available: 10.1371/journal.pone.0125471. </li>
+
+                 
+
+                <li>Weir, B. S., & Cockerham, C. C. (1984). Estimating F-Statistics for the Analysis of Population Structure. Evolution, 38(6), 1358–1370. https://doi.org/10.2307/2408641 </li>
+
+                <li>Koboldt, D.C., Miller, R.D., Kwok, P.-Y., 2006. Distribution of Human SNPs and Its Effect on High-Throughput Genotyping. Hum Mutat 27, 249–254. https://doi.org/10.1002/humu.20286 
+                </li>
+                <li>Ramírez-Bello, J., Jiménez-Morales, M., 2017. [Functional implications of single nucleotide polymorphisms (SNPs) in protein-coding and non-coding RNA genes in multifactorial diseases]. Gac Med Mex 153, 238–250. </li>
+                <li>Shastry, B.S., 2009. SNPs: impact on gene function and phenotype. Methods Mol Biol 578, 3–22. https://doi.org/10.1007/978-1-60327-411-1_1 </li>
+                <li>Shen, L.X., Basilion, J.P., Stanton, V.P., 1999. Single-nucleotide polymorphisms can cause different structural folds of mRNA. Proc Natl Acad Sci U S A 96, 7871–7876. </li>
+
+
+            </ol>
+
+        </p>
+        
+
+        <hr>
+  
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

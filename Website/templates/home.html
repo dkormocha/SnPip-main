@@ -1,0 +1,104 @@
+<!--  Flask tool to use base template       -->
+{%extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+<!-- Jumbotron component with carousel feature for some information about website-->
+<div class="jumbotron" style='height: 329px;'>
+
+  <div id="carouselContent" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ul class="carousel-indicators ">
+          <li data-target="#carouselContent" data-slide-to="0" class="active bg-dark"></li>
+          <li data-target="#carouselContent" data-slide-to="1" class=" bg-dark"></li>
+          <li data-target="#carouselContent" data-slide-to="2" class=" bg-dark"></li>
+      </ul>
+
+      <div class="carousel-inner" role="listbox" style="height:250px;" >
+          <div class="carousel-item active  p-5">
+              <h1 class="display-3">Welcome to SN<span class="text-danger">P</span>ip!</h1>
+              <div class="para">
+                  A web application which allows users to search and retrieve SNP information for genomic region of interest from the 1000
+                  Genomes Project data set. 
+              </div>
+          </div>
+
+          <div class="carousel-item p-5">
+              <h1 class="display-3">Stastical Analysis</h1>
+              <div class="para">
+                Built in algorithm for SNP summary statistics such as haplotype diversity, 
+                Tajima's D and population genetic variation. 
+              </div>
+            
+          </div>
+
+          <div class="carousel-item p-5">
+              <h1 class="display-3">Large SNP database</h1>
+              <div class="para">
+                 Over a 1,000,000 SNP's with allele frequency and genotype information for 5 populations to search from.
+              </div>
+             
+          </div>
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev" data-interval="4000">
+          <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselContent" role="button" data-slide="next" data-interval="4000">
+          <span class="sr-only">Next</span>
+      </a>
+  </div>
+</div>
+</div>
+
+<div class='float-container'>
+  <div class="float-child">
+    <div class="container-fluid text-center mt-5">
+      <div class="row">
+
+                  
+        <div class="container-fluid">
+          <div class="headie2">Search for SNPs</div>
+          <br>
+          <a class="button btn btn-danger btn-lg" href="/search_one" role="button" onclick="$('#loading').show();"> SNPip Search! </a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<!-- jumbotron component to highlight some of the function of the software -->
+
+<div class="jumbotron p-4 " style="margin-top: 100px;">
+    <div class="row text-center">
+
+      <div class="col-sm-3">
+        <div class="headie3"> Search SNP </div>
+        <div class="para">Detailed information for SNP's of interest </div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="headie3"> Download Statistical Data</div>
+        <div class="para"> Download text files containing summary statistics</div>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="headie3">  1000 Genome Project</div>
+        <div class="para"> Retrival of SNPs information using 1000 Genome project database </div>
+      </div>
+
+       <div class="col-sm-3">
+        <div class="headie3"> Sliding Window </div>
+        <div class="para"> Visualise SNPs on an annotated sliding window </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

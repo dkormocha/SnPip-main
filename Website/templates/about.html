@@ -1,0 +1,70 @@
+{%extends "base.html" %}
+<!-- Templating engine Jinja -->
+{% block title %} About {% endblock %}
+{% block content %}
+
+
+<body>
+
+	<div class= 'container' style=" margin-bottom: 25px;" >
+		<div class="headie2" > SN<span class="text-danger">P</span>ip </div>
+
+			<br>
+
+			<div class="para"> 
+				Single nucleotide polymorphisms (SNPs) are a type of polymorphism that involves a variation at a single nucleotide base-pair. SNPs are extensivley studied to see how they relate to disease, treatment response, and other characteristics in humans and other organisms.
+
+				<br>
+				<br>
+
+				<h3>Inputs </h3>
+
+				<br>
+
+				The SNPip web application will allow users to retrieve SNP information given either a genomic coordinate (chromosome, start and end), SNP name (rs value), or gene name (or any aliases associated to it) from specific populations in the 1000 genome project. 
+
+				<br>
+				<br>
+				<img src="/static/search.jpg" style="width: 80%; height: auto;">
+
+				<br>
+				<br>
+
+				<h3> Outputs </h3>
+
+
+				<br>
+
+				The application will return the following information for each SNP:<br><br>	
+				<ul>
+					<li>Name (rs value)</li>
+					<li>Genomic position</li>
+					<li>Genotype frequencies</li>
+					<li>Allele frequency</li>
+				</ul>
+
+				<br>
+
+				If multiple SNPs are returned, the user will be able to select the population(s) and summary
+				statistics of interest, and the application will calculate them and plot their distribution in sliding 
+				windows along the region. The user will also be able to download a text file with the values of summary statistics. 
+				At least three summary statistics should be reported, for instance: <br><br>
+
+				<ul>
+					<li>Genetic diversity</li> 
+					<li>Haplotype diversity (e.g. homozygosity)</li>
+					<li>Test against neutrality (e.g. Tajima’s D)</li>
+					<li>Population genetic variation (FST value) for each pair of populations</li>
+				</ul>
+
+			</div>
+
+	</div>
+
+
+</body>
+
+
+
+{% endblock %}
+
