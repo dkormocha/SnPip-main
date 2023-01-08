@@ -46,7 +46,7 @@ Connecting your machine to the SnPip database stored on in a google cloud instan
  
  
  
- ##Running the Web application!
+ ## Running the Web application!
  
  1) Open your command line or terminal
  2) Check the requirments.txt table for all the dependencies
