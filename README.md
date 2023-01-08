@@ -50,7 +50,7 @@ Connecting your machine to the SnPip database stored on in a google cloud instan
  
  1) Open your command line or terminal
  2) Check the requirments.txt table for all the dependencies
- 3) On command line/terminal install all the dependencies using the pip install command
+ 3) On command line/terminal install all the dependencies using the pip install command with the requirements.txt file 
  4) Once all the dependencies have been installed, cd into the web application folder
  5) Then run command > python main.py to host the Web application locally
  6) Search or click on http://127.0.0.1:5000/ to view web application
